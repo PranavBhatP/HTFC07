@@ -12,6 +12,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import ProgressBar from "../../Components/ProgressBar/ProgressBar";
 import Footer from "../../Components/Footer/Footer";
 
+import { Link } from "react-router-dom";
 const icons = [
   <Sun className="icon"></Sun>,
   <Crosshair className="icon section"></Crosshair>,
@@ -36,33 +37,33 @@ const Section = ({ Title, Paragraph, Icon }) => {
 const HeroSection = () => {
   return (
     <>
-      <div className="bg-[#120624]">
-        <div className="h-screen overflow-hidden relative">
-          <div className="absolute inset-x-1/2 inset-y-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-row justify-evenly items-center w-[85%] h-[50%] gap-px">
-            <div className="flex flex-col justify-center align-start w-[70%] gap-[20px]">
-              <div className="flex flex-col justify-center align-start w-[100%]">
-                <h2 className="text-white fira-sans-medium text-[2.75rem]">
-                  Your Cryptonite For
-                </h2>
-                <h1
-                  className="text-white fira-sans-medium text-[4.5rem]"
-                  id="Hero_Heading"
-                >
-                  Everything Vulnerable
-                </h1>
-              </div>
-              <p className="text-gray-500 antialiased text-lg">
-                Protect yourself from even the most advanced and nascent attack
-                vectors with our state-of-the-art prediction mechanism. Want to
-                check out your risk? Get started with us now!
-              </p>
+      <div className="h-screen overflow-hidden relative" id="About">
+        <div className="absolute inset-x-1/2 inset-y-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-row justify-evenly items-center w-[85%] h-[50%] gap-px">
+          <div className="flex flex-col justify-center align-start w-[70%] gap-[20px]">
+            <div className="flex flex-col justify-center align-start w-[100%]">
+              <h2 className="text-white fira-sans-medium text-[2.75rem]">
+                Your Cryptonite For
+              </h2>
+              <h1
+                className="text-white fira-sans-medium text-[4.5rem]"
+                id="Hero_Heading"
+              >
+                Everything Vulnerable
+              </h1>
+            </div>
+            <p className="text-gray-500 antialiased text-lg">
+              Protect yourself from even the most advanced and nascent attack
+              vectors with our state-of-the-art prediction mechanism. Want to
+              check out your risk? Get started with us now!
+            </p>
+            <Link to="/upload">
               <button className="bg-[#EAEBED] w-[35%] p-5 rounded fira-sans-bold text-black bg-white text-black my-2 hover:scale-[105%] transition duration-300 ease-in-out text-xl">
                 Get Started
               </button>
-            </div>
-            <div className="flex flex-row justify-center items-center overflow-hidden">
-              <img src={Hero} alt="" className="scale-[125%]" />
-            </div>
+            </Link>
+          </div>
+          <div className="flex flex-row justify-center items-center overflow-hidden">
+            <img src={Hero} alt="" className="scale-[125%]" />
           </div>
         </div>
       </div>
@@ -73,7 +74,7 @@ const HeroSection = () => {
 const FeatureSection = () => {
   return (
     <>
-      <div className="h-[80vh] overflow-hidden relative">
+      <div className="h-[80vh] overflow-hidden relative" id="Features">
         <div className="flex flex-row w-[90%] h-[95%] absolute inset-x-1/2 inset-y-1/2 -translate-x-1/2 -translate-y-1/2 justify-evenly items-center">
           <div className="flex flex-row justify-center items-center w-[50%]">
             <img
