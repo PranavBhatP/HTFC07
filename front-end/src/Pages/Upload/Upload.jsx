@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-import Navbar from "../../Components/Navbar/Navbar";
+import UploadNav from "../../Components/Navbar/UploadNav";
 import ProgressBar from "../../Components/ProgressBar/ProgressBar";
 
 import Folder from "./Folder.webp";
@@ -32,9 +32,10 @@ const Upload = () => {
 
   return (
     <div className="bg-[#120624]">
+      <UploadNav></UploadNav>
       <ProgressBar></ProgressBar>
       <div className="min-h-screen relative overflow-hidden">
-        <div className="w-[80%] h-[80%] absolute inset-x-1/2 inset-y-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-zinc-700 rounded-2xl">
+        <div className="w-[80%] h-[75%] absolute inset-x-1/2 inset-y-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-zinc-700 rounded-2xl">
           <div className="w-[97.5%] h-[95%] absolute inset-x-1/2 inset-y-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-dashed border-zinc-800 rounded-2xl">
             <div className="w-full h-full flex flex-col justify-center items-center gap-[10px]">
               <h1 className="fira-sans-medium text-[3.5rem] text-white">
