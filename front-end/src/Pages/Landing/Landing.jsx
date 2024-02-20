@@ -1,7 +1,11 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+
+import gsap, { Elastic } from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import Hero from "./Hero_Photo.png";
-// import Mouse from "./Mouse_Scroll.png";
 import Feature_1 from "./Feature_Art_1.png";
 import Security from "./Security.png";
 
@@ -41,7 +45,10 @@ const HeroSection = () => {
         <div className="absolute inset-x-1/2 inset-y-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-row justify-evenly items-center w-[85%] h-[50%] gap-px">
           <div className="flex flex-col justify-center align-start w-[70%] gap-[20px]">
             <div className="flex flex-col justify-center align-start w-[100%]">
-              <h2 className="text-white fira-sans-medium text-[2.75rem]">
+              <h2
+                className="text-white fira-sans-medium text-[2.75rem]"
+                id="Heading_Sub"
+              >
                 Your Cryptonite For
               </h2>
               <h1
@@ -63,7 +70,7 @@ const HeroSection = () => {
             </Link>
           </div>
           <div className="flex flex-row justify-center items-center overflow-hidden">
-            <img src={Hero} alt="" className="scale-[125%]" />
+            <img src={Hero} alt="" className="scale-[125%]" id="HeroImage" />
           </div>
         </div>
       </div>
@@ -111,13 +118,15 @@ const FeatureSection = () => {
               <div className="flex flex-row justify-evenly items-center gap-[30px] p-[20px]">
                 <Section
                   Title={"Alarming Statistics"}
-                  Paragraph={"1 in 4.5MB's is the victim of a cyberattack"}
+                  Paragraph={
+                    "Every 1 in 10 organisations suffers a critical loss of data due to prevalent vulnerabilities that go unnoticed from common security checks."
+                  }
                   Icon={1}
                 ></Section>
                 <Section
-                  Title={"Alarming Statistics"}
+                  Title={"NVD"}
                   Paragraph={
-                    "91% of cyberattacks begin with phishing email messages."
+                    "We use highly reliable information from the NVD (Backed by the US Govt.) in order to run complex regression models that predict attacks before they happen."
                   }
                   Icon={1}
                 ></Section>
@@ -140,15 +149,15 @@ const ExplanationSection = () => {
               Comprehensive Security To <br></br>Protect Your Business
             </h2>
             <p className="text-gray-500 antialiased text-lg">
-              Our state-of-the-art SaaS website uses complex AI models paired
-              with fundamental concepts in mathematics in order to predict
-              vulnerabilities, along with their impacts on businesses.
+              Cybersecurity breaches pose dire threats to businesses, causing
+              financial turmoil from stolen funds, disrupting operations, and
+              tarnishing reputations. The ripple effect includes a loss of
+              customer trust and decreased sales, creating a precarious
+              environment for businesses to navigate in the digital landscape.
+              In this ever-evolving era, fortifying digital defenses is
+              imperative to ensure the survival and resilience of businesses.
             </p>
-            <p className="text-gray-500 antialiased text-lg">
-              Our state-of-the-art SaaS website uses complex AI models paired
-              with fundamental concepts in mathematics in order to predict
-              vulnerabilities, along with their impacts on businesses.
-            </p>
+            <p className="text-gray-500 antialiased text-lg"></p>
           </div>
           <div className="w-[40%] flex flex-row justify-evenly items-center">
             <img src={Security} alt="" />
@@ -160,9 +169,26 @@ const ExplanationSection = () => {
 };
 
 const Landing = () => {
+  useGSAP(() => {
+    gsap.from("#Navbar", {
+      y: -50,
+      duration: 0.5,
+      delay: 0.5,
+      opacity: 0,
+    });
+
+    gsap.from("#About", {
+      x: -20,
+      y: -20,
+      duration: 0.5,
+      delay: 0.5,
+      opacity: 0,
+    });
+  });
+
   return (
     <>
-      <div className="bg-[#120624]">
+      <div className="bg-[#120624]" id="#main">
         <ProgressBar></ProgressBar>
         <Navbar></Navbar>
         <HeroSection></HeroSection>

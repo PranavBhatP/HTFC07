@@ -173,9 +173,9 @@
 #GitHubLogo:hover {
   color: #6566cd;
 }
-html::-webkit-scrollbar {
+/* html::-webkit-scrollbar {
   display: none;
-}
+} */
 html {
   scroll-behavior: smooth;
 }

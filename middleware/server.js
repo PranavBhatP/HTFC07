@@ -1,6 +1,5 @@
 import express from "express";
 import bodyParser from "body-parser";
-import mongoose from "mongoose";
 import cors from "cors";
 import multer from "multer";
 import morgan from "morgan";
@@ -8,7 +7,10 @@ import helmet from "helmet";
 import path from "path";
 import { fileURLToPath } from "url";
 import { v4 as uuidv4 } from "uuid";
-import request from "request";
+import dotenv from "dotenv";
+
+import uploader from "./controllers/upload.js";
+
 // Configurations
 
 const __filename = fileURLToPath(import.meta.url);
@@ -32,33 +34,25 @@ const storage = multer.diskStorage({
     cb(null, "./uploads/");
   },
   filename: function (req, file, cb) {
-    cb(null, req.body.fileName);
+    cb(null, req.fileName);
   },
 });
 
 const upload = multer({ storage });
 
 app.post(
-  "/test",
+  "/models/coefficients",
   (req, res, next) => {
-    const name = `${Date.now()}-${uuidv4()}`;
-    req.body.fileName = name;
+    const name = `${Date.now()}-${uuidv4()}.json`;
+    req.fileName = name;
     next();
   },
-  upload.single("FileUpload")
+  upload.single("FileUpload"),
+  uploader
 );
 
 const port = process.env.PORT || 6001;
-mongoose
-  .connect(process.env.MONGOURL, {
-    useNewUrlParse: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    app.listen(port, () => {
-      console.log(`Server is listening on port ${port}`);
-    });
-  })
-  .catch((error) => {
-    console.log(`${error} in connecting to the database!`);
-  });
+
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});

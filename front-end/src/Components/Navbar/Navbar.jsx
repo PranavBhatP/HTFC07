@@ -8,7 +8,7 @@ const Navbar = () => {
         id="Navbar"
       >
         <Link to="/">
-          <h1 id="Navbar_Heading" className="fira-sans-bold text-2xl">
+          <h1 id="Navbar_Heading" className="fira-sans-bold text-3xl">
             CryptoniteAI
           </h1>
         </Link>
