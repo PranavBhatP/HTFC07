@@ -22,8 +22,8 @@ def predict():
     for technology in tech_list:
         r = nvdlib.searchCVE(keywordSearch= technology,key = api_key, delay = 1)
         coefficients = regressor(r)
-        attack_vectors_month = analysis(coefficients[2])
-        attack_vectors_year = analysis(coefficients[3])
+        attack_vectors_month = analysis(coefficients[1])
+        attack_vectors_year = analysis(coefficients[2])
 
         body = {
             "coords": coefficients[0],
