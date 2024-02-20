@@ -54,8 +54,6 @@ def regressor(r):
 
     return (future_coefficients, future_intercepts)
 
-
-
 technologies = ["Exynos","Galaxy"]
 
 for technology in technologies:
