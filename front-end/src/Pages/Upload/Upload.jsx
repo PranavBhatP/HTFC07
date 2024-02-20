@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { ReportContext } from "../../App";
 
 import UploadNav from "../../Components/Navbar/UploadNav";
 import ProgressBar from "../../Components/ProgressBar/ProgressBar";
 
 import Folder from "./Folder.webp";
-
 import Superman from "./superman-punch.mp4";
 
 import axios from "axios";
@@ -37,8 +38,8 @@ const LoaderModal = () => {
 const Upload = () => {
   const [file, setFile] = useState();
   const [loading, setLoading] = useState(0);
-
   const navigate = useNavigate();
+  const { data, setData } = useContext(ReportContext);
 
   const onInputChange = (e) => {
     setFile(e.target.files[0]);
@@ -56,8 +57,10 @@ const Upload = () => {
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
     );
+    // console.log(result.data);
     setLoading(0);
-    navigate("/");
+    setData(result.data);
+    navigate("/report");
   };
 
   return (
