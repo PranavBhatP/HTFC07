@@ -5,6 +5,7 @@ from sklearn.linear_model import LinearRegression
 from dotenv import load_dotenv
 import os
 import json
+import json
 
 def cyclicEncode(year_month):
     year, month = int(year_month[:4]), int(year_month[4:6])
@@ -52,13 +53,10 @@ def regressor(r):
     future_model = LinearRegression()
     future_model.fit(np.arange(len(future_dates)).reshape(-1, 1), future_predictions)
 
-    future_coefficients = future_model.coef_
-    future_intercepts = future_model.intercept_
-
     results = future_predictions.flatten()
     rms = np.sqrt(np.mean(results**2))
 
-    return (future_coefficients[0][0], future_intercepts[0], np.around(results[0], decimals = 1), np.around(rms, decimals = 1))
+    return (dict(list(zip(future_dates, results))), np.around(results[0], decimals = 1), np.around(rms, decimals = 1))
 
 def analysis(base):
     f = open("nvdcve-1.1-2023.json","r", encoding = "utf-8")
@@ -91,4 +89,7 @@ def analysis(base):
     for vector in vectors:
         results[vector] = (vectors[vector][0]/count)*(((vectors[vector][1]/vectors[vector][0])*0.8)+((vectors[vector][2]/vectors[vector][0])*0.6)+((vectors[vector][3]/vectors[vector][0])*0.4))
     sorted_results = sorted(results.items(), key=lambda x: x[1], reverse=True)
-    return sorted_results
+    results = {}
+    for i in sorted_results:
+        results[i[0]] = i[1]
+    return results

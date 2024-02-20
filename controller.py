@@ -26,10 +26,9 @@ def predict():
         attack_vectors_year = analysis(coefficients[3])
 
         body = {
-            "coefficients": coefficients[0],
-            "intercepts": coefficients[1],
-            "base-score-month": coefficients[2],
-            "base-score-year": coefficients[3],
+            "coords": coefficients[0],
+            "base-score-month": coefficients[1],
+            "base-score-year": coefficients[2],
             "attack-vectors-month": attack_vectors_month,
             "attack-vectors-year": attack_vectors_year,
         }
