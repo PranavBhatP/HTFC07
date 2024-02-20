@@ -62,9 +62,4 @@ def regressor(r):
 
     return (future_coefficients[0][0], future_intercepts[0], np.around(results[0], decimals = 1), np.around(rms, decimals = 1))
 
-technologies = ["Exynos","Galaxy","Magical"]
-
-for technology in technologies:
-    r = nvdlib.searchCVE(keywordSearch= technology,key = api_key, delay = 1)
-    coefficients = regressor(r)
-    print(coefficients)
+    
