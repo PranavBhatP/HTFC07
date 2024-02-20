@@ -24,12 +24,20 @@ const uploader = async (req, res, next) => {
     }
     console.log(response.data);
     const dataProcessed = [];
+    const dataMeta = [];
+    const dataTechnologies = [];
 
     for (let i = 0; i < response.data.length; i++) {
       const keys = Object.keys(response.data[i].coords);
       const values = Object.values(response.data[i].coords);
 
       const temp = [];
+      const temp2 = [
+        response.data[i]["attack-vectors-month"],
+        response.data[i]["attack-vectors-year"],
+        response.data[i]["base-score-month"],
+        response.data[i]["base-score-year"],
+      ];
 
       for (let j = 0; j < keys.length; j++) {
         const object = {
@@ -40,9 +48,17 @@ const uploader = async (req, res, next) => {
         temp.push(object);
       }
       dataProcessed.push(temp);
+      dataMeta.push(temp2);
+      dataTechnologies.push(response.data[i]["technology"]);
     }
 
-    return res.status(200).json({ data: dataProcessed });
+    return res
+      .status(200)
+      .json({
+        data: dataProcessed,
+        meta: dataMeta,
+        technologies: dataTechnologies,
+      });
   });
 };
 

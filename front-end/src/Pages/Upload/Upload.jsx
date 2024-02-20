@@ -57,9 +57,8 @@ const Upload = () => {
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
     );
-    // console.log(result.data);
     setLoading(0);
-    setData(result.data);
+    setData(result);
     navigate("/report");
   };
 
