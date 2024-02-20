@@ -26,6 +26,7 @@ def predict():
         attack_vectors_year = analysis(coefficients[2])
 
         body = {
+            "technology": technology,
             "coords": coefficients[0],
             "base-score-month": coefficients[1],
             "base-score-year": coefficients[2],
