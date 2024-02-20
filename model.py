@@ -92,4 +92,7 @@ def analysis(base):
     for vector in vectors:
         results[vector] = (vectors[vector][0]/count)*(((vectors[vector][1]/vectors[vector][0])*0.8)+((vectors[vector][2]/vectors[vector][0])*0.6)+((vectors[vector][3]/vectors[vector][0])*0.4))
     sorted_results = sorted(results.items(), key=lambda x: x[1], reverse=True)
-    return sorted_results
+    results = {}
+    for i in sorted_results:
+        results[i[0]] = i[1]
+    return results
