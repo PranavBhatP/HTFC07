@@ -36,6 +36,8 @@ def regressor(r):
     if(len(y)<=10):
         return None
 
+    X = np.array(x).reshape(-1,1)
+
     X_encoded = np.array([cyclicEncode(date) for date in x])
 
     Y = np.array(y).reshape(-1, 1)
@@ -55,7 +57,10 @@ def regressor(r):
     future_coefficients = future_model.coef_
     future_intercepts = future_model.intercept_
 
-    return (future_coefficients[0][0], future_intercepts[0], np.around(future_predictions[0], decimals = 1)[0])
+    results = future_predictions.flatten()
+    rms = np.sqrt(np.mean(results**2))
+
+    return (future_coefficients[0][0], future_intercepts[0], np.around(results[0], decimals = 1), np.around(rms, decimals = 1))
 
 technologies = ["Exynos","Galaxy","Magical"]
 
