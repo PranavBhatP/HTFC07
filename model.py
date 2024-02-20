@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import os
 import json
 import json
+import json
 
 def cyclicEncode(year_month):
     year, month = int(year_month[:4]), int(year_month[4:6])
