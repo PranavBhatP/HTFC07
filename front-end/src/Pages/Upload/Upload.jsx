@@ -1,13 +1,14 @@
 import React from "react";
 
 import Navbar from "../../Components/Navbar/Navbar";
+import ProgressBar from "../../Components/ProgressBar/ProgressBar";
 
 import Folder from "./Folder.webp";
 
 const Upload = () => {
   return (
     <div className="bg-[#120624]">
-      <Navbar></Navbar>
+      <ProgressBar></ProgressBar>
       <div className="min-h-screen relative overflow-hidden">
         <div className="w-[80%] h-[70%] absolute inset-x-1/2 inset-y-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-zinc-700 rounded-2xl">
           <div className="w-[97.5%] h-[95%] absolute inset-x-1/2 inset-y-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-dashed border-zinc-800 rounded-2xl">
@@ -19,9 +20,16 @@ const Upload = () => {
                 Fast and Easy Way
               </p>
               <img src={Folder} alt="" className="scale-[80%]" />
-              <button className="text-white py-3 px-5 border-2 border-zinc-600 rounded">
-                Upload Your File
-              </button>
+              <form action="">
+                <input
+                  type="file"
+                  accept=".xml"
+                  name="FileUpload"
+                  id="FileUpload"
+                  className="text-white py-3 px-5 border-2 border-zinc-600 rounded flex flex-row"
+                />
+              </form>
+
               <p className="text-gray-500 antialiased text-sm mt-2">
                 Check out the XML Format Below!
               </p>
