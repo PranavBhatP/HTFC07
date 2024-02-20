@@ -4,9 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from dotenv import load_dotenv
 import os
-
-load_dotenv()
-api_key = os.getenv("API_KEY")
+import json
 
 def cyclicEncode(year_month):
     year, month = int(year_month[:4]), int(year_month[4:6])
@@ -62,9 +60,35 @@ def regressor(r):
 
     return (future_coefficients[0][0], future_intercepts[0], np.around(results[0], decimals = 1), np.around(rms, decimals = 1))
 
-technologies = ["Exynos","Galaxy","Magical"]
+def analysis(base):
+    f = open("nvdcve-1.1-2023.json","r", encoding = "utf-8")
+    cve_data = json.load(f)
+    vectors = {}
+    count = 0
+    for cve_item in cve_data['CVE_Items']:
+        try:
+            base_score = cve_item['impact']['baseMetricV3']['cvssV3']['baseScore']
+            if base == base_score:
+                count+=1
+                attack_vector = cve_item['impact']['baseMetricV3']['cvssV3']['attackVector']
+                attack_complexity = cve_item['impact']['baseMetricV3']['cvssV3']['attackComplexity']
+                if(attack_vector not in vectors):
+                    vectors[attack_vector] = [1,0,0,0]
+                else:
+                    vectors[attack_vector][0]+=1
+                
+                if(attack_complexity=="LOW"):
+                    vectors[attack_vector][1]+=1
+                elif(attack_complexity=="MEDIUM"):
+                    vectors[attack_vector][2]+=1
+                elif(attack_complexity=="HIGH"):
+                    vectors[attack_vector][3]+=1
 
-for technology in technologies:
-    r = nvdlib.searchCVE(keywordSearch= technology,key = api_key, delay = 1)
-    coefficients = regressor(r)
-    print(coefficients)
+        except KeyError:
+            continue
+    
+    results = {}
+    for vector in vectors:
+        results[vector] = (vectors[vector][0]/count)*(((vectors[vector][1]/vectors[vector][0])*0.8)+((vectors[vector][2]/vectors[vector][0])*0.6)+((vectors[vector][3]/vectors[vector][0])*0.4))
+    sorted_results = sorted(results.items(), key=lambda x: x[1], reverse=True)
+    return sorted_results
