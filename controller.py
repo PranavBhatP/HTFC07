@@ -3,7 +3,7 @@ import nvdlib
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
-from model import regressor, cyclicEncode
+from model import regressor, cyclicEncode, analysis
 import os 
 from dotenv import load_dotenv
 
@@ -18,19 +18,25 @@ def predict():
 
     tech_list = data["Technologies"]
 
-    predicted_data = {}
+    predicted_data = []
     for technology in tech_list:
         r = nvdlib.searchCVE(keywordSearch= technology,key = api_key, delay = 1)
         coefficients = regressor(r)
+        attack_vectors_month = analysis(coefficients[2])
+        attack_vectors_year = analysis(coefficients[3])
 
-    body = {
-        "coefficients": coefficients[0],
-        "intercepts": coefficients[1],
-        "base-score-month": coefficients[2],
-        "base-score-year": coefficients[3],
-    }
+        body = {
+            "coefficients": coefficients[0],
+            "intercepts": coefficients[1],
+            "base-score-month": coefficients[2],
+            "base-score-year": coefficients[3],
+            "attack-vectors-month": attack_vectors_month,
+            "attack-vectors-year": attack_vectors_year,
+        }
+
+        predicted_data.append(body)
     
-    return jsonify(body)
+    return jsonify(predicted_data)
 
 if __name__=="__main__":
     app.run(debug=True)
