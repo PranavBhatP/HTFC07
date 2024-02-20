@@ -55,7 +55,7 @@ def regressor(r):
     future_coefficients = future_model.coef_
     future_intercepts = future_model.intercept_
 
-    return (future_coefficients, future_intercepts)
+    return (future_coefficients[0][0], future_intercepts[0], np.around(future_predictions[0], decimals = 1)[0])
 
 technologies = ["Exynos","Galaxy","Magical"]
 
