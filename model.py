@@ -33,6 +33,9 @@ def regressor(r):
                 except:
                     pass
 
+    if(len(y)<=10):
+        return None
+
     X_encoded = np.array([cyclicEncode(date) for date in x])
 
     Y = np.array(y).reshape(-1, 1)
@@ -40,7 +43,7 @@ def regressor(r):
     model = LinearRegression()
     model.fit(X_encoded, Y)
 
-    future_dates = ['202403','202404','202405','202406','202407','202408','202409','202410','202411','202412','202501', '202502', '202503', '202504', '202505']
+    future_dates = ['202403','202404','202405','202406','202407','202408','202409','202410','202411','202412','202501', '202502', '202503', '202504', '202505''202506', '202507', '202508', '202509', '202510', '202511', '202512']
     future_X_encoded = np.array([cyclicEncode(date) for date in future_dates])
 
     future_X_encoded = np.array([cyclicEncode(date) for date in future_dates])
@@ -54,7 +57,7 @@ def regressor(r):
 
     return (future_coefficients, future_intercepts)
 
-technologies = ["Exynos","Galaxy"]
+technologies = ["Exynos","Galaxy","Magical"]
 
 for technology in technologies:
     r = nvdlib.searchCVE(keywordSearch= technology,key = api_key, delay = 1)
